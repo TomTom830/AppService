@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="AppArxiv">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Liste de choses à faire</title>
+        <link rel="stylesheet" href="style.css">
+
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+        <script src="/index.js"></script>
+    </head>
+
+
+    <body>
+        <div ng-controller="mainController" class="container">
+            <div id="zone_recherche">
+                <input type="text" placeholder="modifier" ng-model="entree_recherche.text"></h5>
+                <input type="checkbox" ng-model="checkbox.title" name="title_checkbox">
+                <label for="author_checkbox">Title</label>
+                <input type="checkbox" ng-model="checkbox.author" name="author_checkbox">
+                <label for="author_checkbox">Author</label>
+                <input type="checkbox" ng-model="checkbox.abstract" name="abstract_checkbox">
+                <label for="author_checkbox">Abstract</label>
+                <input type="checkbox" ng-model="checkbox.comment" name="comment_checkbox">
+                <label for="author_checkbox">Comment</label>
+                <input type="checkbox" ng-model="checkbox.journal" name="author_checkbox">
+                <label for="author_checkbox">Journal Reference</label>
+                <input type="checkbox" ng-model="checkbox.subject" name="author_checkbox">
+                <label for="author_checkbox">Subject Category</label>
+                <input type="checkbox" ng-model="checkbox.report" name="author_checkbox">
+                <label for="author_checkbox">Report Number</label>
+                <input type="checkbox" ng-model="checkbox.id" name="author_checkbox">
+                <label for="author_checkbox">Id</label>
+                <input type="checkbox" ng-model="checkbox.all" name="author_checkbox">
+                <label for="author_checkbox">All</label>
+                <button ng-click="recherche()" class="button button__text"> Rechercher </button><br />
+            </div>
+
+                <p> Nombre de résultats : {{ res_rech.length }}</p>
+                <div id="article-list">
+                    <div ng-repeat="x in res_rech" class="post on-list">
+                        <h1 class="post-title">Titre : {{ x.title._text }}</h1>
+                        <h2>Résumé : </h2>
+                        <div class="post-content">{{ x.summary._text}}</div>
+                        <h2>Auteurs : </h2>
+                        <div ng-repeat="y in x.author" class="post-tags">
+                            {{y.name._text}}
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+</html>
