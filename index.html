@@ -42,7 +42,7 @@
                         <h1 class="post-title">Titre : {{ x.title._text }}</h1>
                         <h2>Résumé : </h2>
                         <div class="post-content">{{ x.summary._text}}</div>
-                        <h2>Auteurs : </h2>
+                        <h2>Auteurs : {{ x.author.name._text }}</h2>
                         <div ng-repeat="y in x.author" class="post-tags">
                             {{y.name._text}}
                         </div>

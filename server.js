@@ -14,8 +14,10 @@ app.use(bodyParser.json({ type : 'application/vnd.api+json' })); //type de l'app
 
 app.use('/', require('./api-route'));
 
-//Utilisation du port 8080 : 
-app.listen(8080);
+//Utilisation du port 8080 :
+dataLayer.init(function () {
+    app.listen(8080);
+});
 console.log("on utilise le port 8080");
 
 //3qdy5YVLmyfowxMJ
