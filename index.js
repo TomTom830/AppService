@@ -6,6 +6,7 @@ function mainController($scope, $http) {
     $scope.entree_recherche = {};
     $scope.entree_auteur = {};
     $scope.checkbox = {};
+    $scope.res_rech_hal = {};
 
     //rajout d'une donnée (appel à la fonction post dans server.js)
     $scope.recherche = function() {
@@ -18,10 +19,11 @@ function mainController($scope, $http) {
                 console.log('Error : ' + data);
             });
 
-        $http.get('/recherche_hal/quafafou')
+        $http.get('/recherche_hal/'+$scope.entree_recherche.text)
         .success(function(data) {
             console.log('OK : ' + typeof(data)+ "\nContent  : "+data);
             //$scope.res_rech =data;
+            $scope.res_rech_hal =data.response.docs;
         })
         .error(function(data) {
             console.log('Error : ' + data);

@@ -55,16 +55,21 @@ router.get('/recherche_arxiv/:entree', function (req, res) {
     });
 });
 
-    
+/*&fq=en_abstract_s:["" TO *]*/
 router.get('/recherche_hal/:entree', function (req, res) {
-    http.get("http://api.archives-ouvertes.fr/ref/author/?q=("+req.params.entree+")&wt=json?fl=*", function(response) {
+    //http.get("http://api.archives-ouvertes.fr/ref/author/?q=("+req.params.entree+")&wt=json&fl=*", function(response) {
+        http.get("http://api.archives-ouvertes.fr/search/?q=authFullName_t:"+(req.params.entree)+
+            "&wt=json&fl=en_abstract_s,title_s,authFullName_s&fq=en_abstract_s:[\"\" TO *]&rows=10", function(response) {
         received_data = '';
         response.on('data', function (d) {
             received_data = received_data + d;
         });
         response.on('end', function send_json_data() {
-            //console.log('données hal recue :\n'+received_data);
-            res.send(received_data);
+            console.log('données hal recue :\n'+received_data);
+            var json_data = JSON.parse(received_data);
+
+            res.send(json_data);
+
         });
     });
 });
