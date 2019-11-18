@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://toto:3qdy5YVLmyfowxMJ@cluster0-952lh.mongodb.net/test?retryWrites=true&w=majority";
+var url = "mongodb+srv://toto:3qdy5YVLmyfowxMJ@cluster0-952lh.mongodb.net/ArxivApp?retryWrites=true&w=majority";
 
 var client = new MongoClient(url, {useNewUrlParser: true});
 //Password : 3qdy5YVLmyfowxMJ
@@ -20,6 +20,15 @@ var dataLayer = {
         db.collection("Article").find(recherche).toArray(function(err, docs){
             cb(docs);
         });
+    },
+
+    //{ projection: { _id: 0, name: 1, address: 1 } }
+    ArticleExist : function(projection, cb){
+        var ret = db.collection("Article").findOne(projection, function(err, result) {
+            if (err) throw err;
+            cb(result);
+        });
+        return ret;
     },
 
     insertArticle : function(task, cb){
