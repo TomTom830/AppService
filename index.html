@@ -22,21 +22,21 @@
                 <p> Nombre de résultats : {{ res_rech.length + res_rech_hal.length }}</p>
                 <div id="article-list">
                     <div ng-repeat="x in res_rech" class="post on-list">
-                        <h1 class="post-title">Titre : {{ x.title._text }} (ArXiv)</h1>
+                        <h1 class="post-title">Titre : {{ x.titre }} (ArXiv)</h1>
                         <h2>Résumé : </h2>
-                        <div class="post-content">{{ x.summary._text}}</div>
-                        <h2>Auteurs : {{ x.author.name._text }}</h2>
-                        <div ng-repeat="y in x.author" class="post-tags">
-                            {{y.name._text}}
+                        <div class="post-content">{{ x.sommaire}}</div>
+                        <h2>Auteurs :</h2>
+                        <div ng-repeat="y in x.auteur" class="post-tags">
+                            {{y}}
                         </div>
                     </div>
 
                     <div ng-repeat="x in res_rech_hal" class="post on-list">
-                        <h1 class="post-title">Titre : {{ x.title_s[0] }} (HAL)</h1>
+                        <h1 class="post-title">Titre : {{ x.titre }} (HAL)</h1>
                         <h2>Résumé : </h2>
-                        <div class="post-content">{{ x.en_abstract_s[0] }}</div>
+                        <div class="post-content">{{ x.sommaire}}</div>
                         <h2>Auteurs : </h2>
-                        <div ng-repeat="y in x.authFullName_s" class="post-tags">
+                        <div ng-repeat="y in x.auteur" class="post-tags">
                             {{y}}
                         </div>
                     </div>

@@ -1,13 +1,19 @@
+/*
+ * Couche Data chargé de stoquer les documents des APIs dans une base de 
+ * données mongo local ou en ligne suivant l'url conservée
+*/
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://toto:3qdy5YVLmyfowxMJ@cluster0-952lh.mongodb.net/ArxivApp?retryWrites=true&w=majority";
+var url = "mongodb://localhost/ArxivApp";
+//var url = "mongodb+srv://toto:3qdy5YVLmyfowxMJ@cluster0-952lh.mongodb.net/ArxivApp?retryWrites=true&w=majority";
+//Password : 3qdy5YVLmyfowxMJ
+
 
 var client = new MongoClient(url, {useNewUrlParser: true});
-//Password : 3qdy5YVLmyfowxMJ
 var db;
 ObjectId = require('mongodb').ObjectID;
 
 var dataLayer = {
-
+    //Connection a la BDD
     init : function(cb){
         client.connect(function(err){
             if(err) throw err;
@@ -15,14 +21,7 @@ var dataLayer = {
             cb();
         });
     },
-
-    getArticle : function(recherche,cb){
-        db.collection("Article").find(recherche).toArray(function(err, docs){
-            cb(docs);
-        });
-    },
-
-    //{ projection: { _id: 0, name: 1, address: 1 } }
+    //Verifie si un article existe
     ArticleExist : function(projection, cb){
         var ret = db.collection("Article").findOne(projection, function(err, result) {
             if (err) throw err;
@@ -30,19 +29,9 @@ var dataLayer = {
         });
         return ret;
     },
-
+    //Insere un article dans la BDD
     insertArticle : function(task, cb){
         db.collection("Article").insertOne(task, function(err,result){
-            cb();
-        });
-    },
-
-
-    deleteTask : function(id_task, cb){
-        var myquery = { _id: ObjectId(id_task) };
-        db.collection("listes").deleteOne(myquery, function(err, obj) {
-            if (err) throw err;
-            console.log("1 document deleted");
             cb();
         });
     },
