@@ -1,11 +1,11 @@
 var router = require('express').Router();
 const http = require('http');
 var convert = require('xml-js');
-var dataLayer = require('./datalayer');
+var dataLayer = require('./data/datalayer');
 
 //Récupère un fichier / et l'envoi à index.html
 router.get('/', function(req, res) {
-    res.sendFile(__dirname+'/index.html');
+    res.sendFile(__dirname+'/public/index.html');
 });
 
 //prend en charge une recherche sur l'API arxiv en solicitant l'API

@@ -2,7 +2,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var dataLayer = require('./datalayer');
+var dataLayer = require('./data/datalayer');
 /* Initialisation : */
 var app = express();
 

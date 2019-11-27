@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="AppArxiv">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Appli Arxiv HAL</title>
+        <link rel="stylesheet" href="style.css">
+
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+        <script src="/public/index.js"></script>
+    </head>
+
+
+    <body>
+        <div ng-controller="mainController" class="container">
+            <div id="zone_recherche">
+                <h2>Recherche Auteur : </h2>
+                <input type="text" placeholder="modifier" ng-model="entree_recherche.text"></h5>
+                <button ng-click="recherche()" class="button button__text"> Rechercher </button><br />
+            </div>
+
+                <p> Nombre de résultats : {{ res_rech.length + res_rech_hal.length }}</p>
+                <div id="article-list">
+                    <div ng-repeat="x in res_rech" class="post on-list">
+                        <h1 class="post-title">Titre : {{ x.titre }} (ArXiv)</h1>
+                        <h2>Résumé : </h2>
+                        <div class="post-content">{{ x.sommaire}}</div>
+                        <h2>Auteurs :</h2>
+                        <div ng-repeat="y in x.auteur" class="post-tags">
+                            {{y}}
+                        </div>
+                    </div>
+
+                    <div ng-repeat="x in res_rech_hal" class="post on-list">
+                        <h1 class="post-title">Titre : {{ x.titre }} (HAL)</h1>
+                        <h2>Résumé : </h2>
+                        <div class="post-content">{{ x.sommaire}}</div>
+                        <h2>Auteurs : </h2>
+                        <div ng-repeat="y in x.auteur" class="post-tags">
+                            {{y}}
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+    </body>
+</html>
